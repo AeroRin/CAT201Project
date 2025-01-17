@@ -12,8 +12,8 @@ const About = () => {
       </a>
 
       <nav className="navbar">
-        <a href="/home">Home</a>
-        <a href="/about">About</a>
+        <Link to="/">Home</Link>
+        <Link to="/about">About</Link>
         <a href="/menu">Menu</a>
         <a href="/product">Products</a>
         <a href="/contact">Contact</a>

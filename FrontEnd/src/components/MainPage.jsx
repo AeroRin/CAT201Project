@@ -12,7 +12,7 @@ const MainPage = () => {
       </a>
 
       <nav className="navbar">
-        <a href="/home">Home</a>
+        <Link to="/">Home</Link>
         <Link to="/about">About</Link>
         <a href="/menu">Menu</a>
         <a href="/product">Products</a>

@@ -6,10 +6,8 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <swicth>
           <Route path="/" element={<MainPage />} />
           <Route path="/About" element={<About />} />
-        </swicth>
       </Routes>
     </BrowserRouter>
   );
