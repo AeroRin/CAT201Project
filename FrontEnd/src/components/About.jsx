@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./MainPage.css";
+import "./About.css";
 
-const MainPage = () => {
+const About = () => {
   return (
 
     <header className="header">
@@ -13,7 +13,7 @@ const MainPage = () => {
 
       <nav className="navbar">
         <a href="/home">Home</a>
-        <Link to="/about">About</Link>
+        <a href="/about">About</a>
         <a href="/menu">Menu</a>
         <a href="/product">Products</a>
         <a href="/contact">Contact</a>
@@ -33,4 +33,4 @@ const MainPage = () => {
   );
 };
 
-export default MainPage;
+export default About;
