@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./MainPage.css";
+import "./Product.css";
 
-const MainPage = () => {
+const Product = () => {
   return (
 
     <header className="header">
@@ -32,4 +32,4 @@ const MainPage = () => {
   );
 };
 
-export default MainPage;
+export default Product;
