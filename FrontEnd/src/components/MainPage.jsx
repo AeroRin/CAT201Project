@@ -32,8 +32,8 @@ const MainPage = () => {
         <nav ref={navbarRef} className="navbar">
           <Link to="/">Home</Link>
           <Link to="/about">About</Link>
-          <a href="/product">Products</a>
-          <a href="/contact">Contact</a>
+          <Link to="/product">Products</Link>
+          <Link to="/contact">Contact</Link>
         </nav>
 
         <div className="icons">
