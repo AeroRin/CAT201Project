@@ -1,91 +1,163 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
-:root{
+/* :root{
     --main-color: #d3ad7f;
     --black: #13131a;
     --bg: #0101013;
     --border:.1rem solid rgba(255,255,255,.3);
 }
 
-*{
-    font-family: 'Roboto', sans-serif;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    outline: none;
-    border: none;
-    text-decoration: none;
-    text-transform: capitalize;
-    transition: .2s linear;
+* {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  text-decoration: none;
+  /* text-transform: capitalize; */
+  /* transition: 0.2s linear;
+}  */
+
+html {
+  /* font-size:62.5%; */
+  overflow-x: hidden;
+  scroll-padding-top: 9rem;
+  scroll-behavior: smooth;
 }
 
-html{
-    font-size:62.5%;
-    overflow-x: hidden;
-    scroll-padding-top: 9rem;
-    scroll-behavior: smooth;
+html::-webkti-scrollbar {
+  width: 0.8rem;
 }
 
-html::-webkti-scrollbar{
-    width: .8rem;
+html::-webkit-scrollbar-track {
+  background: transparent;
 }
 
-html::-webkit-scrollbar-track{
-    background: transparent;
+html::-webkit-scrollbar-thumb {
+  background: #fff;
+  border-radius: 5rem;
 }
 
-html::-webkit-scrollbar-thumb{
-    background: #fff;
-    border-radius: 5rem;
+body {
+  background: var(--black);
 }
 
-body{
-    background: var(--black);
+.header {
+  background: var(--black);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 7%;
+  border-bottom: var(--border);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
 }
 
-.header{
-    background: var(--black);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1.5rem 7%;
-    border-bottom: var(--border);
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
+.header .logo img {
+  height: 6rem;
+  object-fit: contain;
 }
 
-.header .logo img{ 
-    height: 6rem;
-    object-fit: contain;
+.header .navbar a {
+  margin: 0.1rem;
+  font-size: 1.6rem;
+  color: #fff;
+  margin-right: 2rem;
 }
 
-.header .navbar a{
-    margin: 0.1rem;
-    font-size: 1.6rem;
-    color:#fff;
-    margin-right: 2rem;
+.header .navbar a:hover {
+  color: var(--main-color);
+  border-bottom: 0.1rem solid var(--main-color);
+  padding-bottom: 0.5rem;
 }
 
-.header .navbar a:hover{
-    color:var(--main-color);
-    border-bottom: .1rem solid var(--main-color);
-    padding-bottom: 0.5rem;
+.header .icons div {
+  color: #fff;
+  cursor: pointer;
+  font-size: 2.5rem;
+  margin-left: 2rem;
 }
 
-.header .icons div{
-    color:#fff;
-    cursor: pointer;
-    font-size: 2.5rem;
-    margin-left: 2rem;
-}
-
-.header .icons div:hover{
-    color:var(--main-color);
+.header .icons div:hover {
+  color: var(--main-color);
 }
 
 #menu-button{
     display: none;
+} */
+
+.heading{
+    text-align: center;
+    color: var(--main-color);
+    text-transform: uppercase;
+    padding-bottom: 3.5rem;
+    font-size: 4rem;
+}
+
+.heading span{
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.products .box-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+    gap: 1.5rem; 
+}
+
+.products .box-container .box{
+    text-align: center;
+    border: var(--border);
+    padding: 2rem;
+}
+
+.products .box-container .box .icons a{
+    height: 5rem;
+    width: 5rem;
+    line-height: 5rem;
+    font-size: 2rem;
+    border: var(--border);
+    color: #fff;
+    margin: 3rem;
+}
+
+.products .box-container .box .icons a:hover{
+    background: var(--main-color);
+}
+
+.products .box-container .box .image{
+    padding: 2.5rem 0;
+}
+
+.products .box-container .box .image img{
+    height: 25rem;
+}
+
+.products .box-container .box .content h3{
+    color: #fff;
+    font-size: 2.5rem;
+}
+
+.products .box-container .box .content .stars{
+    padding: 1.5rem;
+}
+
+.products .box-container .box .content .stars i{
+    font-size: 1.7rem;
+    color: var(--main-color);
+}
+
+.products .box-container .box .content .price{
+    color: #fff;
+    font-size: 2.5rem;
+}
+
+.products .box-container .box .content .price span{
+    text-decoration: line-through;
+    font-weight: lighter;
+    font-size: 1.5rem;
 }

@@ -4,85 +4,151 @@ import { toggleNavbar, toggleSearchForm, toggleCart, closeAll } from "../scripts
 import "./Product.css";
 
 const Product = () => {
+return(
+    <section class="products" id="product">
+        
+        <h1 class = "heading"> Our <span> Products </span></h1>
 
-  const navbarRef = useRef(null);
-  const searchFormRef = useRef(null);
-  const cartItemsRef = useRef(null);
-  
-  useEffect(() => {
-    // Close all elements on scroll
-    window.onscroll = () => {
-      closeAll(navbarRef.current, searchFormRef.current, cartItemsRef.current);
-    };
+        <div className="box-container">
 
-    return () => {
-      // Cleanup function to remove the scroll listener
-      window.onscroll = null;
-    };
-  }, []);
+            <div className="box">
+                <div className="icons">
+                    <a href="#" class="fas fa-shopping-cart"></a>
+                    <a href="#" class="fas fa-heart"></a>
+                    <a href="#" class="fas fa-eye"></a>
+                </div>
+                <div className="image">
+                    <img src="src/assets/Products/Colombian.jpg.webp" alt="" />
+                </div>
+                <div className="content">
+                    <h3>Fresh Coffee</h3>
+                    <div className="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <div className="price"> $15.99 <span> $20.99 </span></div>
+                </div>
+            </div>
 
-  return (
-    <header className="header">
-      <a href="#" className="logo">
-        <img src = "src/assets/logo.jpg" alt="logo" />
-      </a>
+            <div className="box">
+                <div className="icons">
+                    <a href="#" class="fas fa-shopping-cart"></a>
+                    <a href="#" class="fas fa-heart"></a>
+                    <a href="#" class="fas fa-eye"></a>
+                </div>
+                <div className="image">
+                    <img src="src/assets/Products/BrazilianSantos.webp" alt="" />
+                </div>
+                <div className="content">
+                    <h3>Fresh Coffee</h3>
+                    <div className="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <div className="price"> $15.99 <span> $20.99 </span></div>
+                </div>
+            </div>
 
-      <nav ref={navbarRef} className="navbar">
-        <Link to="/">Home</Link>
-        <Link to="/about">About</Link>
-        <Link to="/product">Products</Link>
-        <Link to="/contact">Contact</Link>
-      </nav>
+            <div className="box">
+                <div className="icons">
+                    <a href="#" class="fas fa-shopping-cart"></a>
+                    <a href="#" class="fas fa-heart"></a>
+                    <a href="#" class="fas fa-eye"></a>
+                </div>
+                <div className="image">
+                    <img src="src/assets/Products/Ethiopian.webp" alt="" />
+                </div>
+                <div className="content">
+                    <h3>Fresh Coffee</h3>
+                    <div className="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <div className="price"> $15.99 <span> $20.99 </span></div>
+                </div>
+                
+            </div>
 
-      <div className="icons">
-        <div className="fas fa-search" id="search-button" onClick={() => toggleSearchForm(searchFormRef.current)}></div>
-        <div className="fas fa-shopping-cart" id="cart-button" onClick={() => toggleCart(cartItemsRef.current)}></div>
-        <div className="fas fa-bars" id="menu-btn" onClick={() => toggleNavbar(navbarRef.current)}></div> 
-        {/* Some reason that menu-button doesn't work but menu-btn works */}
-      </div>
+            <div className="box">
+                <div className="icons">
+                    <a href="#" class="fas fa-shopping-cart"></a>
+                    <a href="#" class="fas fa-heart"></a>
+                    <a href="#" class="fas fa-eye"></a>
+                </div>
+                <div className="image">
+                    <img src="src/assets/Products/Glass.jpg" alt="" />
+                </div>
+                <div className="content">
+                    <h3>Fresh Coffee</h3>
+                    <div className="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <div className="price"> $15.99 <span> $20.99 </span></div>
+                </div>
+                
+            </div>
 
-      <div ref={searchFormRef} className="search-form">
-        <input type="search" id="search-box" placeholder="Search here..."/>
-        <label htmlFor="search-box" className="fas fa-search"></label>
-      </div>
+            <div className="box">
+                <div className="icons">
+                    <a href="#" class="fas fa-shopping-cart"></a>
+                    <a href="#" class="fas fa-heart"></a>
+                    <a href="#" class="fas fa-eye"></a>
+                </div>
+                <div className="image">
+                    <img src="src/assets/Products/Filter.webp" alt="" />
+                </div>
+                <div className="content">
+                    <h3>Fresh Coffee</h3>
+                    <div className="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <div className="price"> $15.99 <span> $20.99 </span></div>
+                </div>
+                
+            </div>
 
-      <div className="cart-items-container" ref={cartItemsRef}>
-        <div className="cart-item">
-          <span className="fas fa-times"></span>
-          <img src="src/assets/cart-item-1.jpg" alt="product1"/>
-          <div className="content">
-            <h3>Product 1</h3>
-            <div className="price">$15.99/-</div>
-          </div>
+            <div className="box">
+                <div className="icons">
+                    <a href="#" class="fas fa-shopping-cart"></a>
+                    <a href="#" class="fas fa-heart"></a>
+                    <a href="#" class="fas fa-eye"></a>
+                </div>
+                <div className="image">
+                    <img src="src/assets/Products/Container.webp" alt="" />
+                </div>
+                <div className="content">
+                    <h3>Fresh Coffee</h3>
+                    <div className="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <div className="price"> $15.99 <span> $20.99 </span></div>
+                </div>
+                
+            </div>
         </div>
-        <div className="cart-item">
-          <span className="fas fa-times"></span>
-          <img src="src/assets/cart-item-2.jpg" alt="product2"/>
-          <div className="content">
-            <h3>Product 2</h3>
-            <div className="price">$18.99/-</div>
-          </div>
-        </div>
-        <div className="cart-item">
-          <span className="fas fa-times"></span>
-          <img src="src/assets/cart-item-3.jpg" alt="product3"/>
-          <div className="content">
-            <h3>Product 3</h3>
-            <div className="price">$16.99/-</div>
-          </div>
-        </div>
-        <div className="cart-item">
-          <span className="fas fa-times"></span>
-          <img src="src/assets/cart-item-24.jpg" alt="product4"/>
-          <div className="content">
-            <h3>Product 4</h3>
-            <div className="price">$15.99/-</div>
-          </div>
-        </div>
-        <a href="#" className="button">checkout now</a>
-      </div>
-    </header>
-  );
+    </section>
+);
 };
 
 export default Product;
