@@ -5,6 +5,8 @@ import Product from './components/Product.jsx';
 import SignUp from './components/SignUp.jsx';
 import MainLayout from './Layouts/MainLayout.jsx';
 import Login from './components/Login.jsx';
+import Cart from './components/Cart.jsx';
+import Checkout from './components/Checkout.jsx';
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
           <Route path='/product' element={<Product />} />
           <Route path='/sign-up' element={<SignUp />} />
           <Route path='/login' element={<Login />} />
+          <Route path='/cart' element={<Cart />} />
+          <Route path='/checkout' element={<Checkout />} />
         </Route>
       </Routes>
     </BrowserRouter>

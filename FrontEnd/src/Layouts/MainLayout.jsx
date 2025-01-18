@@ -9,36 +9,28 @@ import {
   SendHorizontal,
   ShoppingCart,
   Twitter,
+  User,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import {
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetDescription,
-  SheetFooter,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetDescription, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 
 const MainLayout = () => {
   return (
     <div>
-      <header className='border-0 border-b border-solid border-black/30 sticky top-0 bg-white z-50'>
-        <div className='bg-black text-center text-white px-5 py-2'>
+      <header className='border-0 border-b border-solid border-primary/30 sticky top-0 bg-primary-foreground z-50'>
+        <div className='bg-primary-foreground text-center text-primary px-5 py-2'>
           <p>
             Summer Sale For All Swim Suits And Free Express Delivery - OFF 50%!{' '}
-            <Link to='#' className='underline'>
+            <Link to='/product' className='underline'>
               Shop Now
             </Link>
           </p>
         </div>
-        <div className='bg-white'>
+        <div className='bg-primary text-primary-foreground'>
           <div className='container py-5'>
             <div className='flex items-center justify-between gap-3'>
               <Link to='/'>
-                <h6 className='font-bold text-xl'>Coffee Shop</h6>
+                <img src='./src/assets/logo.jpg' alt='logo' className='w-16 h-16 md:w-24 md:h-24' />
               </Link>
 
               <div className='items-center justify-center gap-7 hidden lg:flex'>
@@ -62,7 +54,7 @@ const MainLayout = () => {
               <div className='flex items-center justify-center gap-5'>
                 <div className='items-center justify-center hidden lg:flex'>
                   <input
-                    className='bg-[#f5f5f5] w-56 h-12 py-2 px-3 border border-[#f5f5f5] border-solid focus:border-black transition placeholder:text-black/30'
+                    className='bg-[#f5f5f5] w-56 h-12 py-2 px-3 border border-[#f5f5f5] border-solid transition placeholder:text-black/30 text-black'
                     type='text'
                     placeholder='What are you looking for?'
                   />
@@ -75,13 +67,17 @@ const MainLayout = () => {
                   <Heart />
                 </button>
 
-                <button>
+                <Link to='/cart'>
                   <ShoppingCart />
+                </Link>
+
+                <button>
+                  <User />
                 </button>
 
                 <Sheet>
                   <SheetTrigger asChild>
-                    <Button size='icon' className='lg:hidden'>
+                    <Button size='icon' className='lg:hidden !bg-primary-foreground !text-primary'>
                       <Menu />
                     </Button>
                   </SheetTrigger>
@@ -122,10 +118,10 @@ const MainLayout = () => {
           </div>
         </div>
       </header>
-      <main className='bg-white'>
+      <main className='bg-primary text-primary-foreground'>
         <Outlet />
       </main>
-      <footer className='bg-black text-white py-8 lg:py-16'>
+      <footer className='bg-primary-foreground text-primary py-8 lg:py-16'>
         <div className='container'>
           <div className='grid gap-10 md:grid-cols-3 xl:grid-cols-5'>
             <div>
@@ -134,13 +130,13 @@ const MainLayout = () => {
                 <h6 className='text-lg font-normal mb-4'>Subscribe</h6>
                 <p className='text-base'>Get 10% off your first order</p>
               </div>
-              <div className='inline-flex items-center justify-center border border-white border-solid rounded'>
+              <div className='inline-flex items-center justify-center border border-primary border-solid rounded'>
                 <input
-                  className='bg-transparent w-44 h-12 py-2 px-3 transition placeholder:text-white/30'
+                  className='bg-transparent w-44 h-12 py-2 px-3 transition placeholder:text-primary/30'
                   type='email'
                   placeholder='Enter your email'
                 />
-                <button className='w-12 h-12 inline-flex justify-center items-center text-white'>
+                <button className='w-12 h-12 inline-flex justify-center items-center text-primary'>
                   <SendHorizontal />
                 </button>
               </div>
@@ -162,7 +158,7 @@ const MainLayout = () => {
                   <Link to='#'>My Account</Link>
                 </li>
                 <li>
-                  <Link to='#'>Login / Register</Link>
+                  <Link to='/login'>Login</Link> / <Link to='/sign-up'>Register</Link>
                 </li>
                 <li>
                   <Link to='#'>Cart</Link>
