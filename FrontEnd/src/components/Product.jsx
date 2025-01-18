@@ -5,30 +5,149 @@ import "./Product.css";
 const Product = () => {
   return (
 
-    <header className="header">
-      
-      <a href="#" className="logo">
-        <img src = "src/assets/logo.jpg" alt="logo" />
-      </a>
+    <section class="products" id="product">
+        
+        <h1 class = "heading"> Our <span> Products </span></h1>
 
-      <nav className="navbar">
-        <Link to="/">Home</Link>
-        <Link to="/about">About</Link>
-        <Link to="/product">Products</Link>
-        <a href="/contact">Contact</a>
-      </nav>
+        <div className="box-container">
 
-      <div className="icons">
-        <div className="fas fa-search" id="search-button"></div>
-        <div className="fas fa-shopping-cart" id="cart-button"></div>
-        <div className="fas fa-bars" id="menu-button"></div>
-      </div>
+            <div className="box">
+                <div className="icons">
+                    <a href="#" class="fas fa-shopping-cart"></a>
+                    <a href="#" class="fas fa-heart"></a>
+                    <a href="#" class="fas fa-eye"></a>
+                </div>
+                <div className="image">
+                    <img src="src/assets/Products/Colombian.jpg.webp" alt="" />
+                </div>
+                <div className="content">
+                    <h3>Fresh Coffee</h3>
+                    <div className="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <div className="price"> $15.99 <span> $20.99 </span></div>
+                </div>
+            </div>
 
-      <div className="search-form">
-        <input type="search" id="search-box" placeholder="Search here..."/>
-        <label htmlFor="search-box" className="fas fa-search"></label>
-      </div>
-    </header>
+            <div className="box">
+                <div className="icons">
+                    <a href="#" class="fas fa-shopping-cart"></a>
+                    <a href="#" class="fas fa-heart"></a>
+                    <a href="#" class="fas fa-eye"></a>
+                </div>
+                <div className="image">
+                    <img src="src/assets/Products/BrazilianSantos.webp" alt="" />
+                </div>
+                <div className="content">
+                    <h3>Fresh Coffee</h3>
+                    <div className="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <div className="price"> $15.99 <span> $20.99 </span></div>
+                </div>
+            </div>
+
+            <div className="box">
+                <div className="icons">
+                    <a href="#" class="fas fa-shopping-cart"></a>
+                    <a href="#" class="fas fa-heart"></a>
+                    <a href="#" class="fas fa-eye"></a>
+                </div>
+                <div className="image">
+                    <img src="src/assets/Products/Ethiopian.webp" alt="" />
+                </div>
+                <div className="content">
+                    <h3>Fresh Coffee</h3>
+                    <div className="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <div className="price"> $15.99 <span> $20.99 </span></div>
+                </div>
+                
+            </div>
+
+            <div className="box">
+                <div className="icons">
+                    <a href="#" class="fas fa-shopping-cart"></a>
+                    <a href="#" class="fas fa-heart"></a>
+                    <a href="#" class="fas fa-eye"></a>
+                </div>
+                <div className="image">
+                    <img src="src/assets/Products/Glass.jpg" alt="" />
+                </div>
+                <div className="content">
+                    <h3>Fresh Coffee</h3>
+                    <div className="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <div className="price"> $15.99 <span> $20.99 </span></div>
+                </div>
+                
+            </div>
+
+            <div className="box">
+                <div className="icons">
+                    <a href="#" class="fas fa-shopping-cart"></a>
+                    <a href="#" class="fas fa-heart"></a>
+                    <a href="#" class="fas fa-eye"></a>
+                </div>
+                <div className="image">
+                    <img src="src/assets/Products/Filter.webp" alt="" />
+                </div>
+                <div className="content">
+                    <h3>Fresh Coffee</h3>
+                    <div className="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <div className="price"> $15.99 <span> $20.99 </span></div>
+                </div>
+                
+            </div>
+
+            <div className="box">
+                <div className="icons">
+                    <a href="#" class="fas fa-shopping-cart"></a>
+                    <a href="#" class="fas fa-heart"></a>
+                    <a href="#" class="fas fa-eye"></a>
+                </div>
+                <div className="image">
+                    <img src="src/assets/Products/Container.webp" alt="" />
+                </div>
+                <div className="content">
+                    <h3>Fresh Coffee</h3>
+                    <div className="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <div className="price"> $15.99 <span> $20.99 </span></div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
   );
 };
 
