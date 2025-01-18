@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
+import { toggleNavbar, toggleSearchForm, toggleCart, closeAll } from "../scripts/script.js"; // Import the functions
 import "./Product.css";
 
 const Product = () => {
-  return (
-
+return(
     <section class="products" id="product">
         
         <h1 class = "heading"> Our <span> Products </span></h1>
@@ -148,7 +148,7 @@ const Product = () => {
             </div>
         </div>
     </section>
-  );
+);
 };
 
 export default Product;
