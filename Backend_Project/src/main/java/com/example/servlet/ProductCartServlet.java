@@ -4,181 +4,175 @@ import java.io.*;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
-import java.util.*;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.fasterxml.jackson.databind.node.ArrayNode;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 @WebServlet("/ProductCartServlet")
 public class ProductCartServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private final ObjectMapper mapper = new ObjectMapper();
-
-    private String getCartFilePath() {
-        String dataPath = getServletContext().getRealPath("/WEB-INF/data");
-        File dataDir = new File(dataPath);
-        if (!dataDir.exists()) {
-            dataDir.mkdirs();
-        }
-        return dataPath + File.separator + "cart.json";
-    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
-        
-        System.out.println("=== ProductCartServlet: GET Request Received ===");
-        
         response.setHeader("Access-Control-Allow-Origin", "*");
         response.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
         response.setHeader("Access-Control-Allow-Headers", "Content-Type");
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-
+        
         PrintWriter out = response.getWriter();
-
+        
         try {
-            File cartFile = new File(getCartFilePath());
-            System.out.println("Cart file path: " + cartFile.getAbsolutePath());
-            
-            ObjectNode jsonResponse = mapper.createObjectNode();
-            if (cartFile.exists()) {
-                // Read existing cart
-                List<Map<String, Object>> cart = mapper.readValue(cartFile, List.class);
-                
-                // Calculate total items and total price
-                int totalItems = 0;
-                double totalPrice = 0.0;
-                
-                for (Map<String, Object> item : cart) {
-                    int quantity = ((Number) item.get("quantity")).intValue();
-                    double price = ((Number) item.get("price")).doubleValue();
-                    
-                    totalItems += quantity;
-                    totalPrice += (price * quantity);
-                }
+            // Get cart file path
+            String realPath = getServletContext().getRealPath("/data/cart.json");
+            File cartFile = new File(realPath);
+            System.out.println("Reading cart from: " + cartFile.getAbsolutePath());
 
-                jsonResponse.put("status", "success");
-                jsonResponse.set("items", mapper.valueToTree(cart));
-                jsonResponse.put("totalItems", totalItems);
-                jsonResponse.put("totalPrice", totalPrice);
-                
-                System.out.println("Sending cart data: " + mapper.writerWithDefaultPrettyPrinter().writeValueAsString(jsonResponse));
-            } else {
-                jsonResponse.put("status", "success");
-                jsonResponse.set("items", mapper.createArrayNode());
-                jsonResponse.put("totalItems", 0);
-                jsonResponse.put("totalPrice", 0.0);
-                
-                System.out.println("No cart found, sending empty cart");
+            // Check if cart file exists
+            if (!cartFile.exists()) {
+                System.out.println("Cart file does not exist. Creating empty cart.");
+                JSONObject jsonResponse = new JSONObject()
+                    .put("status", "success")
+                    .put("items", new JSONArray())
+                    .put("totalItems", 0)
+                    .put("subtotal", 0.0)
+                    .put("totalPrice", 0.0);
+                out.print(jsonResponse.toString());
+                return;
             }
-            out.print(mapper.writeValueAsString(jsonResponse));
+
+            // Read cart data
+            String cartContent = new String(java.nio.file.Files.readAllBytes(cartFile.toPath()));
+            JSONArray cart = new JSONArray(cartContent.isEmpty() ? "[]" : cartContent);
+            System.out.println("Cart content: " + cart.toString(2));
+
+            // Calculate totals
+            int totalItems = 0;
+            double totalPrice = 0.0;
+            for (int i = 0; i < cart.length(); i++) {
+                JSONObject item = cart.getJSONObject(i);
+                totalItems += item.getInt("quantity");
+       
+                totalPrice += (item.getDouble("price") * item.getInt("quantity"));
+            }
+
+            // Send response
+            JSONObject jsonResponse = new JSONObject()
+                .put("status", "success")
+                .put("items", cart)
+                .put("totalItems", totalItems)
+                .put("totalPrice", totalPrice);
+
+            System.out.println("Sending response: " + jsonResponse.toString(2));
+            out.print(jsonResponse.toString());
 
         } catch (Exception e) {
             System.err.println("Error in ProductCartServlet (GET):");
             e.printStackTrace();
             
-            ObjectNode errorResponse = mapper.createObjectNode();
-            errorResponse.put("status", "error");
-            errorResponse.put("message", e.getMessage());
-            out.print(mapper.writeValueAsString(errorResponse));
-        } finally {
-            out.flush();
-            out.close();
+            JSONObject errorResponse = new JSONObject()
+                .put("status", "error")
+                .put("message", "Error fetching cart: " + e.getMessage());
+            out.print(errorResponse.toString());
         }
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
-        
-        System.out.println("=== ProductCartServlet: POST Request Received ===");
-        System.out.println("Content-Type: " + request.getContentType());
-        
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
         response.setHeader("Access-Control-Allow-Origin", "*");
         response.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
         response.setHeader("Access-Control-Allow-Headers", "Content-Type");
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
 
         PrintWriter out = response.getWriter();
 
         try {
-            // Read and log the request body
-            StringBuilder jsonBody = new StringBuilder();
+            // Read request body
+            StringBuilder requestBody = new StringBuilder();
             try (BufferedReader reader = request.getReader()) {
                 String line;
                 while ((line = reader.readLine()) != null) {
-                    jsonBody.append(line);
+                    requestBody.append(line);
                 }
             }
-            System.out.println("Request Body: " + jsonBody.toString());
+            System.out.println("Request Body: " + requestBody.toString());
 
-            // Process the request
-            Map<String, Object> requestData = mapper.readValue(jsonBody.toString(), Map.class);
+            // Parse the request data
+            JSONObject requestData = new JSONObject(requestBody.toString());
             
-            File cartFile = new File(getCartFilePath());
+            // Get cart file
+            String realPath = getServletContext().getRealPath("/data/cart.json");
+            File cartFile = new File(realPath);
             System.out.println("Cart file path: " + cartFile.getAbsolutePath());
             
-            List<Map<String, Object>> cart;
+            // Create parent directories if they don't exist
+            cartFile.getParentFile().mkdirs();
+            
+            // Read or create cart
+            JSONArray cart;
             if (cartFile.exists()) {
-                cart = mapper.readValue(cartFile, List.class);
+                String cartContent = new String(java.nio.file.Files.readAllBytes(cartFile.toPath()));
+                cart = new JSONArray(cartContent.isEmpty() ? "[]" : cartContent);
             } else {
-                cart = new ArrayList<>();
+                cart = new JSONArray();
             }
 
+            // Check if product already exists
             boolean productExists = false;
             int totalItems = 0;
             double totalPrice = 0.0;
             
-            for (Map<String, Object> item : cart) {
-                if (((Number) item.get("productId")).intValue() == ((Number) requestData.get("productId")).intValue()) {
-                    item.put("quantity", ((Number) item.get("quantity")).intValue() + 1);
+            for (int i = 0; i < cart.length(); i++) {
+                JSONObject item = cart.getJSONObject(i);
+                if (item.getInt("productId") == requestData.getInt("productId")) {
+                    item.put("quantity", item.getInt("quantity") + 1);
                     productExists = true;
                 }
-                totalItems += ((Number) item.get("quantity")).intValue();
-                totalPrice += (((Number) item.get("price")).doubleValue() * ((Number) item.get("quantity")).intValue());
+                totalItems += item.getInt("quantity");
+                totalPrice += (item.getDouble("price") * item.getInt("quantity"));
             }
 
+            // Add new item if not exists
             if (!productExists) {
-                Map<String, Object> cartItem = new HashMap<>();
-                cartItem.put("productId", requestData.get("productId"));
-                cartItem.put("name", requestData.get("name"));
-                cartItem.put("price", requestData.get("price"));
+                JSONObject cartItem = new JSONObject();
+                cartItem.put("productId", requestData.getInt("productId"));
+                cartItem.put("name", requestData.getString("name"));
+                cartItem.put("price", requestData.getDouble("price"));
+                cartItem.put("image", requestData.getString("image"));
                 cartItem.put("quantity", 1);
-                cart.add(cartItem);
+                cart.put(cartItem);
                 
                 totalItems += 1;
-                totalPrice += ((Number) requestData.get("price")).doubleValue();
+                totalPrice += requestData.getDouble("price");
             }
 
             // Write updated cart
-            mapper.writerWithDefaultPrettyPrinter().writeValue(cartFile, cart);
-            System.out.println("Cart updated successfully");
+            try (FileWriter fw = new FileWriter(cartFile)) {
+                fw.write(cart.toString(2));
+                System.out.println("Cart updated successfully");
+            }
 
-            ObjectNode jsonResponse = mapper.createObjectNode();
-            jsonResponse.put("status", "success");
-            jsonResponse.put("message", "Product added to cart");
-            jsonResponse.set("items", mapper.valueToTree(cart));
-            jsonResponse.put("totalItems", totalItems);
-            jsonResponse.put("totalPrice", totalPrice);
+            // Send response
+            JSONObject jsonResponse = new JSONObject()
+                .put("status", "success")
+                .put("message", "Product added to cart")
+                .put("items", cart)
+                .put("totalItems", totalItems)
+                .put("totalPrice", totalPrice);
             
-            System.out.println("Sending response: " + mapper.writerWithDefaultPrettyPrinter().writeValueAsString(jsonResponse));
-            out.print(mapper.writeValueAsString(jsonResponse));
+            System.out.println("Sending response: " + jsonResponse.toString(2));
+            out.print(jsonResponse.toString());
 
         } catch (Exception e) {
             System.err.println("Error in ProductCartServlet (POST):");
             e.printStackTrace();
             
-            ObjectNode errorResponse = mapper.createObjectNode();
-            errorResponse.put("status", "error");
-            errorResponse.put("message", e.getMessage());
-            String jsonError = mapper.writeValueAsString(errorResponse);
-            System.out.println("Error Response: " + jsonError);
-            out.print(jsonError);
-        } finally {
-            out.flush();
-            out.close();
+            JSONObject errorResponse = new JSONObject()
+                .put("status", "error")
+                .put("message", e.getMessage());
+            out.print(errorResponse.toString());
         }
     }
 

@@ -47,6 +47,13 @@
         <scope>compile</scope>
     </dependency>
 
+    <!-- Add this dependency -->
+    <dependency>
+        <groupId>org.json</groupId>
+        <artifactId>json</artifactId>
+        <version>20231013</version>
+    </dependency>
+
   </dependencies>
   <build>
     <finalName>Backend_Project</finalName>

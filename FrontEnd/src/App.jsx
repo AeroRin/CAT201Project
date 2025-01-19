@@ -8,6 +8,8 @@ import Login from './components/Login.jsx';
 import Cart from './components/Cart.jsx';
 import Checkout from './components/Checkout.jsx';
 import Contact from './components/Contact.jsx';
+import ForgotPassword from './components/ForgotPassword';
+import TermOfUse from './components/TermOfUse.jsx';
 
 function App() {
   return (
@@ -22,6 +24,8 @@ function App() {
           <Route path='/cart' element={<Cart />} />
           <Route path='/checkout' element={<Checkout />} />
           <Route path='/contact' element={<Contact />} />
+          <Route path='/forgot-password' element={<ForgotPassword />} />
+          <Route path='/terms-of-use' element={<TermOfUse />} />
         </Route>
       </Routes>
     </BrowserRouter>

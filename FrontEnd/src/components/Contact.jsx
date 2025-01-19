@@ -24,7 +24,7 @@ const Contact = () => {
                 </div>
 
                 <p>We are available 24/7, 7 days a week.</p>
-                <p>Phone: +8801611112222</p>
+                <p>Phone: +6014-2763178</p>
               </div>
               <div className='py-5'>
                 <div className='border-0 border-b border-solid border-primary-foreground'></div>
@@ -38,8 +38,8 @@ const Contact = () => {
                 </div>
 
                 <p>Fill out our form and we will contact you within 24 hours.</p>
-                <p>Emails: customer@coffeeshop.com</p>
-                <p>Emails: support@coffeeshop.com</p>
+                <p>Emails: customer@bean&brew.com</p>
+                <p>Emails: support@bean&brew.com</p>
               </div>
             </div>
           </div>
