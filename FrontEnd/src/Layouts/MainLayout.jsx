@@ -118,7 +118,7 @@ const MainLayout = () => {
           </div>
         </div>
       </header>
-      <main className='bg-primary text-primary-foreground'>
+      <main className='bg-primary text-primary-foreground max-w-full overflow-x-hidden'>
         <Outlet />
       </main>
       <footer className='bg-primary-foreground text-primary py-8 lg:py-16'>
@@ -146,7 +146,7 @@ const MainLayout = () => {
               <h5 className='font-bold text-xl mb-4'>Support</h5>
               <div className='space-y-5'>
                 <p>111 Bijoy sarani, Dhaka, DH 1515, Bangladesh.</p>
-                <p>coffeeshop@gmail.com</p>
+                <p>support@coffeeshop.com</p>
                 <p>+88015-88888-9999</p>
               </div>
             </div>
@@ -161,13 +161,13 @@ const MainLayout = () => {
                   <Link to='/login'>Login</Link> / <Link to='/sign-up'>Register</Link>
                 </li>
                 <li>
-                  <Link to='#'>Cart</Link>
+                  <Link to='/cart'>Cart</Link>
                 </li>
                 <li>
                   <Link to='#'>Wishlist</Link>
                 </li>
                 <li>
-                  <Link to='#'>Shop</Link>
+                  <Link to='/product'>Shop</Link>
                 </li>
               </ul>
             </div>
@@ -185,7 +185,7 @@ const MainLayout = () => {
                   <Link to='#'>FAQ</Link>
                 </li>
                 <li>
-                  <Link to='#'>Contact</Link>
+                  <Link to='/contact'>Contact</Link>
                 </li>
               </ul>
             </div>

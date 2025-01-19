@@ -7,6 +7,7 @@ import MainLayout from './Layouts/MainLayout.jsx';
 import Login from './components/Login.jsx';
 import Cart from './components/Cart.jsx';
 import Checkout from './components/Checkout.jsx';
+import Contact from './components/Contact.jsx';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path='/login' element={<Login />} />
           <Route path='/cart' element={<Cart />} />
           <Route path='/checkout' element={<Checkout />} />
+          <Route path='/contact' element={<Contact />} />
         </Route>
       </Routes>
     </BrowserRouter>
