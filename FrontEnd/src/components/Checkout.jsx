@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button } from './ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
@@ -8,6 +8,7 @@ import { useState, useEffect } from 'react';
 const Checkout = () => {
   const [cartItems, setCartItems] = useState([]);
   const [totalAmount, setTotalAmount] = useState(0);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchCartItems();
@@ -32,6 +33,33 @@ const Checkout = () => {
       }
     } catch (error) {
       console.error('Error fetching cart items:', error);
+    }
+  };
+
+  const handleCheckout = async () => {
+    try {
+      // You can add API call here to process the order if needed
+      
+      // Show success message
+      alert('Your Order has been placed successfully!');
+      
+      // Clear the cart (optional)
+      await fetch('http://localhost:8080/Backend_Project/ProductCartServlet', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          action: 'clearCart'
+        }),
+      });
+
+      // Navigate to home page
+      navigate('/');
+      
+    } catch (error) {
+      console.error('Error processing checkout:', error);
+      alert('Error processing your order. Please try again.');
     }
   };
 
@@ -175,7 +203,10 @@ const Checkout = () => {
               </div>
 
               <div className='mt-5'>
-                <Button className='!bg-[#DB4444] text-white rounded h-12 px-7 rounded inline-flex justify-center items-center'>
+                <Button 
+                  onClick={handleCheckout}
+                  className="!bg-[#DB4444] text-white rounded h-12 px-7"
+                >
                   Place Order
                 </Button>
               </div>

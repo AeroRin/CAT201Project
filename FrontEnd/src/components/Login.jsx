@@ -54,7 +54,7 @@ const Login = () => {
     <div className='py-8 lg:py-16 text-primary-foreground'>
       <div className='flex flex-col lg:flex-row items-center gap-7 lg:gap-0'>
         <div className='w-full lg:w-1/2'>
-          <img src='/assets/images/sign-up.jpg' alt='Sign Up' />
+          <img src='/assets/images/sign-up.png' alt='Sign Up' />
         </div>
         <div className='w-full lg:w-1/2 px-4 text-xl lg:px-16'>
           <div>

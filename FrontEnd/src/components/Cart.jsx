@@ -35,22 +35,67 @@ const Cart = () => {
 
   const updateQuantity = async (productId, action) => {
     try {
-      const response = await fetch('http://localhost:8080/your-app-name/ProductCartServlet', {
+      const response = await fetch('http://localhost:8080/Backend_Project/ProductCartServlet', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          action: action,
-          productId: productId
+          action: action === 'add' ? 'updateQuantity' : 'decreaseQuantity',
+          productId: productId,
+          change: action === 'add' ? 1 : -1
         }),
       });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
       const data = await response.json();
+      console.log('Update response:', data); // For debugging
+
       if (data.status === 'success') {
+        // Update cart items with new quantities and subtotals
+        const itemsWithSubtotal = data.items.map(item => ({
+          ...item,
+          subtotal: parseFloat((item.price * item.quantity).toFixed(2))
+        }));
+        setCartItems(itemsWithSubtotal);
+        setTotalAmount(data.totalPrice);
+        
+        // Refresh cart data
         fetchCartItems();
+      } else {
+        console.error('Error updating quantity:', data.message);
       }
     } catch (error) {
       console.error('Error updating quantity:', error);
+    }
+  };
+
+  const clearCart = async () => {
+    try {
+      const response = await fetch('http://localhost:8080/Backend_Project/ProductCartServlet', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          action: 'clearCart'
+        }),
+      });
+
+      const data = await response.json();
+      if (data.status === 'success') {
+        setCartItems([]);
+        setTotalAmount(0);
+        alert('Cart cleared successfully!');
+      } else {
+        alert('Failed to clear cart');
+      }
+    } catch (error) {
+      console.error('Error clearing cart:', error);
+      alert('Error clearing cart. Please try again.');
     }
   };
 
@@ -104,7 +149,7 @@ const Cart = () => {
                       <Button 
                         size='icon' 
                         className='!bg-primary-foreground text-primary'
-                        onClick={() => updateQuantity(item.id, 'remove')}
+                        onClick={() => updateQuantity(item.productId, 'remove')}
                       >
                         <Minus />
                       </Button>
@@ -112,7 +157,7 @@ const Cart = () => {
                       <Button 
                         size='icon' 
                         className='!bg-primary-foreground text-primary'
-                        onClick={() => updateQuantity(item.id, 'add')}
+                        onClick={() => updateQuantity(item.productId, 'add')}
                       >
                         <Plus />
                       </Button>
@@ -130,10 +175,17 @@ const Cart = () => {
           ))}
         </div>
 
-        <div className='mb-12'>
+        <div className='mb-12 flex justify-between items-center'>
           <Link to='/product' className='border border-solid border-primary-foreground px-5 py-3 inline-block rounded'>
             Return To Shop
           </Link>
+          <Button 
+            onClick={clearCart}
+            className='!bg-[#DB4444] text-white px-5 py-3 rounded'
+            disabled={cartItems.length === 0}
+          >
+            Clear Cart
+          </Button>
         </div>
 
         <div className='grid gap-7 md:grid-cols-2'>
@@ -162,10 +214,20 @@ const Cart = () => {
               </div>
             </div>
             <div className='text-center'>
-              <Button as-child>
+              <Button 
+                disabled={cartItems.length === 0} 
+                className={`${cartItems.length === 0 ? 'opacity-50 cursor-not-allowed' : ''}`}
+              >
                 <Link
-                  to='/checkout'
-                  className='!bg-[#DB4444] text-white rounded h-12 px-7 rounded inline-flex justify-center items-center'>
+                  to={cartItems.length > 0 ? '/checkout' : '#'}
+                  onClick={(e) => {
+                    if (cartItems.length === 0) {
+                      e.preventDefault();
+                      alert('Your cart is empty. Please add items before checking out.');
+                    }
+                  }}
+                  className='!bg-[#DB4444] text-white rounded h-12 px-7 inline-flex justify-center items-center'
+                >
                   Proceed to checkout
                 </Link>
               </Button>

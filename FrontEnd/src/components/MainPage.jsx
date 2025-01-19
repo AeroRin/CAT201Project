@@ -1,16 +1,14 @@
 import axios from 'axios';
-import React, { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
-import { toggleNavbar, toggleSearchForm, toggleCart, closeAll } from "../scripts/script.js"; // Import the functions
+import { useEffect, useRef } from "react";
 import "./MainPage.css";
+import { closeAll } from "../utils/helpers";  // Adjust the import path to where closeAll is actually defined
+import { Link } from 'react-router-dom';  // Add this import back if it's not there
 
 
 const MainPage = () => {
   const navbarRef = useRef(null);
   const searchFormRef = useRef(null);
   const cartItemsRef = useRef(null);
-  const [data, setData] = useState(null);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
     // Close all elements on scroll
@@ -60,7 +58,9 @@ const MainPage = () => {
           <h3>Start your day </h3>
           <h3>With a fresh cup of coffee</h3>
           <p>Good ideas starts with brainstorming great ideas starts with coffee</p>
-          <a href="#" className="btn">Order Now</a>
+          <Link to="/product" className="btn">
+            Order Now
+          </Link>
         </div>
       </section>
     </>

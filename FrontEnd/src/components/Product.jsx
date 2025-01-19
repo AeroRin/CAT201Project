@@ -59,11 +59,12 @@ const Product = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
+          action: 'addToCart',
           productId: product.id,
           name: product.name,
           price: product.price,
-          subtotal: product.subtotal,
-          image: product.image
+          image: product.image,
+          quantity: 1
         }),
       });
       

@@ -20,7 +20,7 @@ const MainLayout = () => {
       <header className='border-0 border-b border-solid border-primary/30 sticky top-0 bg-primary-foreground z-50'>
         <div className='bg-primary-foreground text-center text-primary px-5 py-2'>
           <p>
-            Summer Sale For All Swim Suits And Free Express Delivery - OFF 50%!{' '}
+            Autumn Sales For All Coffee Lovers Out There with Free Express Delivery and OFF 50%!{' '}
             <Link to='/product' className='underline'>
               Shop Now
             </Link>
@@ -112,8 +112,7 @@ const MainLayout = () => {
             <div>
               <h5 className='font-bold text-xl mb-4'>Quick Links</h5>
               <div className='mb-4'>
-                <h6 className='text-lg font-normal mb-4'><Link to='#'>Privacy Policy</Link></h6>
-                <h6 className='text-lg font-normal mb-4'><Link to='#'>Terms Of Use</Link></h6>
+                <h6 className='text-lg font-normal mb-4'><Link to="/term" className="hover:underline">Term of Use</Link></h6>
                 <h6 className='text-lg font-normal mb-4'><Link to='#'>FAQ</Link></h6>
                 <h6 className='text-lg font-normal mb-4'><Link to='/contact'>Contact</Link></h6>
               </div>
@@ -145,23 +144,6 @@ const MainLayout = () => {
                 </li>
               </ul>
             </div>
-
-            <div>
-              <h5 className='font-bold text-xl mb-4'>Quick Link</h5>
-              <ul className='space-y-5'>
-
-                <li>
-                  <Link to='/terms-of-use'>Terms Of Use</Link>
-                </li>
-                <li>
-                  <Link to='#'>FAQ</Link>
-                </li>
-                <li>
-                  <Link to='/contact'>Contact</Link>
-                </li>
-              </ul>
-            </div>
-
             <div>
               <h5 className='font-bold text-xl mb-4'>Download App</h5>
               <div className='mb-4'>
