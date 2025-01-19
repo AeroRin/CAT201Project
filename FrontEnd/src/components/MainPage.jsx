@@ -1,4 +1,5 @@
-import React, { useEffect, useRef } from "react";
+import axios from 'axios';
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { toggleNavbar, toggleSearchForm, toggleCart, closeAll } from "../scripts/script.js"; // Import the functions
 import "./MainPage.css";
@@ -8,6 +9,8 @@ const MainPage = () => {
   const navbarRef = useRef(null);
   const searchFormRef = useRef(null);
   const cartItemsRef = useRef(null);
+  const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     // Close all elements on scroll
@@ -67,32 +70,32 @@ const MainPage = () => {
 
   return (
     <>
-      <header className="header">
+      {/* <header className="header"> */}
         
-        <a href="#" className="logo">
+        {/* <a href="#" className="logo">
           <img src = "src/assets/logo.jpg" alt="logo" />
-        </a>
+        </a> */}
 
-        <nav ref={navbarRef} className="navbar">
+        {/* <nav ref={navbarRef} className="navbar">
           <Link to="/">Home</Link>
           <Link to="/about">About</Link>
           <Link to="/product">Products</Link>
           <Link to="/contact">Contact</Link>
-        </nav>
+        </nav>  */}
 
-        <div className="icons">
+        {/* <div className="icons">
           <div className="fas fa-search" id="search-button" onClick={() => toggleSearchForm(searchFormRef.current)}></div>
           <div className="fas fa-shopping-cart" id="cart-button" onClick={() => toggleCart(cartItemsRef.current)}></div>
           <div className="fas fa-bars" id="menu-btn" onClick={() => toggleNavbar(navbarRef.current)}></div> 
-          {/* Some reason that menu-button doesn't work but menu-btn works */}
-        </div>
+          {/* {/* Some reason that menu-button doesn't work but menu-btn works
+        </div> */}
 
-        <div ref={searchFormRef} className="search-form">
+        {/* <div ref={searchFormRef} className="search-form">
           <input type="search" id="search-box" placeholder="Search here..."/>
           <label htmlFor="search-box" className="fas fa-search"></label>
-        </div>
+        </div> */}
 
-        <div className="cart-items-container" ref={cartItemsRef}>
+        {/* <div className="cart-items-container" ref={cartItemsRef}>
           <div className="cart-item">
             <span className="fas fa-times"></span>
             <img src="src/assets/cart-item-1.jpg" alt="product1"/>
@@ -127,7 +130,7 @@ const MainPage = () => {
           </div>
           <a href="#" className="button">checkout now</a>
         </div>
-      </header>
+      </header> */}
 
       <section className="home" id="home">
         <div className="content">

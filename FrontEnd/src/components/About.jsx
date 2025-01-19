@@ -22,7 +22,7 @@ const About = () => {
 
   return (
     <>
-    <header className="header">
+    {/* <header className="header">
       <a href="#" className="logo">
         <img src = "src/assets/logo.jpg" alt="logo" />
       </a>
@@ -38,7 +38,7 @@ const About = () => {
         <div className="fas fa-search" id="search-button" onClick={() => toggleSearchForm(searchFormRef.current)}></div>
         <div className="fas fa-shopping-cart" id="cart-button" onClick={() => toggleCart(cartItemsRef.current)}></div>
         <div className="fas fa-bars" id="menu-btn" onClick={() => toggleNavbar(navbarRef.current)}></div> 
-        {/* Some reason that menu-button doesn't work but menu-btn works */}
+        {/* Some reason that menu-button doesn't work but menu-btn works 
       </div>
 
       <div ref={searchFormRef} className="search-form">
@@ -81,7 +81,7 @@ const About = () => {
         </div>
         <a href="#" className="button">checkout now</a>
       </div>
-    </header>
+    </header> */}
 
     <section className="about" id="about">
 

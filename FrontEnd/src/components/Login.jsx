@@ -18,10 +18,13 @@ const Login = () => {
       return;
     }
 
+    // Log what we're sending
+    console.log('Sending data:', { email, password });
+
     try {
       const response = await axios.post('/api/login', {
-        email,
-        password,
+        email: email.trim(),    // Remove any whitespace
+        password: password.trim() // Remove any whitespace
       }, {
         baseURL: 'http://localhost:8080/Backend_Project',
         headers: {
@@ -29,21 +32,20 @@ const Login = () => {
         }
       });
 
+      console.log('Response:', response.data); // Log the response
+
       if (response.data.status === 'success') {
-        // Store user data in localStorage
-        localStorage.setItem('userToken', response.data.token);
-        localStorage.setItem('userData', JSON.stringify(response.data.user));
-        
-        // Show success message (optional)
-        alert(response.data.message);
-        
-        // Redirect to home page
+        // Navigate first, then show success message
         navigate('/');
+        alert(response.data.message);
       } else {
         setErrorMessage(response.data.message || 'Invalid credentials, please try again.');
       }
     } catch (error) {
       console.error('Error during login:', error);
+      if (error.response) {
+        console.log('Error response:', error.response.data); // Log error response
+      }
       setErrorMessage(error.response?.data?.message || 'An error occurred during login. Please try again later.');
     }
   };
@@ -61,10 +63,17 @@ return (
               <p className='font-light text-lg'>Enter your details below</p>
             </div>
             <form className='mb-5'>
+              {errorMessage && (
+                <div className="text-red-500 mb-4">
+                  {errorMessage}
+                </div>
+              )}
               <div className='space-y-5'>
                 <div>
                   <input
                     type='text'
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     className='w-full border-0 border-b border-solid border-primary-foreground text-primary-foreground bg-transparent text-lg placeholder:text-lg py-2 placeholder:font-light font-normal'
                     placeholder='Email or Phone Number'
                   />
@@ -73,13 +82,15 @@ return (
                 <div>
                   <input
                     type='password'
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                     className='w-full border-0 border-b border-solid border-primary-foreground text-primary-foreground bg-transparent text-lg placeholder:text-lg py-2 placeholder:font-light font-normal'
                     placeholder='Password'
                   />
                 </div>
 
                 <div className='flex items-center justify-between gap-5'>
-                  <Button className='!bg-[#DB4444] min-w-28 text-white'>Log In</Button>
+                  <Button onClick={handleSubmit} className='!bg-[#DB4444] min-w-28 text-white'>Log In</Button>
                   <Link to='#' className='text-[#DB4444] text-base'>
                     Forget Password?
                   </Link>
