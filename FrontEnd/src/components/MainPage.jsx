@@ -1,7 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { toggleNavbar, toggleSearchForm, toggleCart, closeAll } from "../scripts/script.js"; // Import the functions
-import axios from "axios";
 import "./MainPage.css";
 
 
@@ -10,11 +9,7 @@ const MainPage = () => {
   const searchFormRef = useRef(null);
   const cartItemsRef = useRef(null);
 
-   // State to store backend data and errors
-   const [data, setData] = useState(null);
-   const [error, setError] = useState(null);
-   useEffect(() => {
-
+  useEffect(() => {
     // Close all elements on scroll
     window.onscroll = () => {
       closeAll(navbarRef.current, searchFormRef.current, cartItemsRef.current);
@@ -140,21 +135,6 @@ const MainPage = () => {
           <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Placeat labore, sint cupiditate distinctio tempora reiciendis.</p>
           <a href="#" className="btn">get yours now</a>
         </div>
-      </section>
-
-      {/* Display fetched data */}
-      <section className="backend-data">
-        {error ? (
-          <div className="error">Error: {error}</div>
-        ) : !data ? (
-          <div>Loading...</div>
-        ) : (
-          <div>
-            <h2>Data from Backend:</h2>
-            {data.message && <p>Message: {data.message}</p>}
-            {data.status && <p>Status: {data.status}</p>}
-          </div>
-        )}
       </section>
     </>
   );
