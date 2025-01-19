@@ -1,0 +1,38 @@
+[
+    {
+        "id": 1,
+        "name": "Colombian Coffee",
+        "price": 15.99,
+        "image": "src/assets/Products/Colombian.jpg.webp"
+    },
+    {
+        "id": 2,
+        "name": "Brazilian Santos",
+        "price": 15.99,
+        "image": "src/assets/Products/BrazilianSantos.webp"
+    },
+    {
+        "id": 3,
+        "name": "Ethiopian Coffee",
+        "price": 15.99,
+        "image": "src/assets/Products/Ethiopian.webp"
+    },
+    {
+        "id": 4,
+        "name": "Glass Coffee",
+        "price": 15.99,
+        "image": "src/assets/Products/Glass.jpg"
+    },
+    {
+        "id": 5,
+        "name": "Filter Coffee",
+        "price": 15.99,
+        "image": "src/assets/Products/Filter.webp"
+    },
+    {
+        "id": 6,
+        "name": "Container Coffee",
+        "price": 15.99,
+        "image": "src/assets/Products/Container.webp"
+    }
+]
