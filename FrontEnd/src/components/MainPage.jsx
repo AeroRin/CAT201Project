@@ -17,22 +17,7 @@ const MainPage = () => {
     window.onscroll = () => {
       closeAll(navbarRef.current, searchFormRef.current, cartItemsRef.current);
     };
-  
-    // Fetch data from the backend API
-    axios
-      .get("http://localhost:8080/Backend_Project/api/data", {  // Updated URL
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
-      .then((response) => {
-        setData(response.data);
-      })
-      .catch((err) => {
-        console.error("Error fetching data:", err);
-        setError(`Failed to load data from the server: ${err.message}`);  // More detailed error
-      });
-  
+    
     return () => {
       // Cleanup function to remove the scroll listener
       window.onscroll = null;
@@ -44,7 +29,7 @@ const MainPage = () => {
       try {
         const token = localStorage.getItem('userToken');
         if (token) {
-          const response = await axios.get('/api/login', {
+          const response = await axios.get('/LoginServlet', {  // Changed from '/api/login'
             baseURL: 'http://localhost:8080/Backend_Project',
             headers: {
               'Authorization': `Bearer ${token}`,

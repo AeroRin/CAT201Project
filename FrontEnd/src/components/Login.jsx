@@ -22,7 +22,7 @@ const Login = () => {
     console.log('Sending data:', { email, password });
 
     try {
-      const response = await axios.post('/api/login', {
+      const response = await axios.post('/LoginServlet', {
         email: email.trim(),    // Remove any whitespace
         password: password.trim() // Remove any whitespace
       }, {
