@@ -17,6 +17,7 @@ const Cart = () => {
           <div className='items-center justify-center py-5 px-8 shadow-[0px_0px_5px] rounded shadow-primary-foreground/20 hidden md:flex'>
             <div className='w-1/4'>
               <p>Product</p>
+              
             </div>
             <div className='w-1/4'>
               <p className='text-center'>Price</p>
