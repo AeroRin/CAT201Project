@@ -46,34 +46,19 @@ const MainLayout = () => {
                   <h6>About</h6>
                 </Link>
 
-                <Link to='/sign-up' className='py-0.5'>
-                  <h6>Sign Up</h6>
+                <Link to='/product' className='py-0.5'>
+                  <h6>Product</h6>
                 </Link>
               </div>
 
               <div className='flex items-center justify-center gap-5'>
-                <div className='items-center justify-center hidden lg:flex'>
-                  <input
-                    className='bg-[#f5f5f5] w-56 h-12 py-2 px-3 border border-[#f5f5f5] border-solid transition placeholder:text-black/30 text-black'
-                    type='text'
-                    placeholder='What are you looking for?'
-                  />
-                  <button className='w-12 h-12 inline-flex justify-center items-center bg-[#f5f5f5] text-black'>
-                    <Search />
-                  </button>
-                </div>
-
-                <button>
-                  <Heart />
-                </button>
-
                 <Link to='/cart'>
                   <ShoppingCart />
                 </Link>
 
-                <button>
+                <Link to='/sign-up'>
                   <User />
-                </button>
+                </Link>
 
                 <Sheet>
                   <SheetTrigger asChild>
@@ -125,20 +110,12 @@ const MainLayout = () => {
         <div className='container'>
           <div className='grid gap-10 md:grid-cols-3 xl:grid-cols-5'>
             <div>
-              <h5 className='font-bold text-xl mb-4'>Exclusive</h5>
+              <h5 className='font-bold text-xl mb-4'>Quick Links</h5>
               <div className='mb-4'>
-                <h6 className='text-lg font-normal mb-4'>Subscribe</h6>
-                <p className='text-base'>Get 10% off your first order</p>
-              </div>
-              <div className='inline-flex items-center justify-center border border-primary border-solid rounded'>
-                <input
-                  className='bg-transparent w-44 h-12 py-2 px-3 transition placeholder:text-primary/30'
-                  type='email'
-                  placeholder='Enter your email'
-                />
-                <button className='w-12 h-12 inline-flex justify-center items-center text-primary'>
-                  <SendHorizontal />
-                </button>
+                <h6 className='text-lg font-normal mb-4'><Link to='#'>Privacy Policy</Link></h6>
+                <h6 className='text-lg font-normal mb-4'><Link to='#'>Terms Of Use</Link></h6>
+                <h6 className='text-lg font-normal mb-4'><Link to='#'>FAQ</Link></h6>
+                <h6 className='text-lg font-normal mb-4'><Link to='/contact'>Contact</Link></h6>
               </div>
             </div>
 
@@ -155,37 +132,16 @@ const MainLayout = () => {
               <h5 className='font-bold text-xl mb-4'>Account</h5>
               <ul className='space-y-5'>
                 <li>
-                  <Link to='#'>My Account</Link>
+                  <Link to='/sign-up'>Register</Link>
                 </li>
                 <li>
-                  <Link to='/login'>Login</Link> / <Link to='/sign-up'>Register</Link>
+                  <Link to='/login'>Login</Link>
                 </li>
                 <li>
                   <Link to='/cart'>Cart</Link>
                 </li>
                 <li>
-                  <Link to='#'>Wishlist</Link>
-                </li>
-                <li>
                   <Link to='/product'>Shop</Link>
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <h5 className='font-bold text-xl mb-4'>Quick Link</h5>
-              <ul className='space-y-5'>
-                <li>
-                  <Link to='#'>Privacy Policy</Link>
-                </li>
-                <li>
-                  <Link to='#'>Terms Of Use</Link>
-                </li>
-                <li>
-                  <Link to='#'>FAQ</Link>
-                </li>
-                <li>
-                  <Link to='/contact'>Contact</Link>
                 </li>
               </ul>
             </div>

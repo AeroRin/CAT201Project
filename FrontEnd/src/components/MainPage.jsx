@@ -55,73 +55,12 @@ const MainPage = () => {
 
   return (
     <>
-      {/* <header className="header"> */}
-        
-        {/* <a href="#" className="logo">
-          <img src = "src/assets/logo.jpg" alt="logo" />
-        </a> */}
-
-        {/* <nav ref={navbarRef} className="navbar">
-          <Link to="/">Home</Link>
-          <Link to="/about">About</Link>
-          <Link to="/product">Products</Link>
-          <Link to="/contact">Contact</Link>
-        </nav>  */}
-
-        {/* <div className="icons">
-          <div className="fas fa-search" id="search-button" onClick={() => toggleSearchForm(searchFormRef.current)}></div>
-          <div className="fas fa-shopping-cart" id="cart-button" onClick={() => toggleCart(cartItemsRef.current)}></div>
-          <div className="fas fa-bars" id="menu-btn" onClick={() => toggleNavbar(navbarRef.current)}></div> 
-          {/* {/* Some reason that menu-button doesn't work but menu-btn works
-        </div> */}
-
-        {/* <div ref={searchFormRef} className="search-form">
-          <input type="search" id="search-box" placeholder="Search here..."/>
-          <label htmlFor="search-box" className="fas fa-search"></label>
-        </div> */}
-
-        {/* <div className="cart-items-container" ref={cartItemsRef}>
-          <div className="cart-item">
-            <span className="fas fa-times"></span>
-            <img src="src/assets/cart-item-1.jpg" alt="product1"/>
-            <div className="content">
-              <h3>Product 1</h3>
-              <div className="price">$15.99/-</div>
-            </div>
-          </div>
-          <div className="cart-item">
-            <span className="fas fa-times"></span>
-            <img src="src/assets/cart-item-2.jpg" alt="product2"/>
-            <div className="content">
-              <h3>Product 2</h3>
-              <div className="price">$18.99/-</div>
-            </div>
-          </div>
-          <div className="cart-item">
-            <span className="fas fa-times"></span>
-            <img src="src/assets/cart-item-3.jpg" alt="product3"/>
-            <div className="content">
-              <h3>Product 3</h3>
-              <div className="price">$16.99/-</div>
-            </div>
-          </div>
-          <div className="cart-item">
-            <span className="fas fa-times"></span>
-            <img src="src/assets/cart-item-24.jpg" alt="product4"/>
-            <div className="content">
-              <h3>Product 4</h3>
-              <div className="price">$15.99/-</div>
-            </div>
-          </div>
-          <a href="#" className="button">checkout now</a>
-        </div>
-      </header> */}
-
       <section className="home" id="home">
         <div className="content">
-          <h3>fresh coffee in the morning</h3>
-          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Placeat labore, sint cupiditate distinctio tempora reiciendis.</p>
-          <a href="#" className="btn">get yours now</a>
+          <h3>Start your day </h3>
+          <h3>With a fresh cup of coffee</h3>
+          <p>Good ideas starts with brainstorming great ideas starts with coffee</p>
+          <a href="#" className="btn">Order Now</a>
         </div>
       </section>
     </>
