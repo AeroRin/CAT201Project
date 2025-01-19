@@ -145,9 +145,9 @@ const MainLayout = () => {
             <div>
               <h5 className='font-bold text-xl mb-4'>Support</h5>
               <div className='space-y-5'>
-                <p>111 Bijoy sarani, Dhaka, DH 1515, Bangladesh.</p>
-                <p>support@coffeeshop.com</p>
-                <p>+88015-88888-9999</p>
+                <p>Jalan Universiti, 11700 Gelugor, Pulau Pinang, Malaysia</p>
+                <p>support@bean&brew.com</p>
+                <p>+6014-2763178</p>
               </div>
             </div>
 
@@ -175,11 +175,9 @@ const MainLayout = () => {
             <div>
               <h5 className='font-bold text-xl mb-4'>Quick Link</h5>
               <ul className='space-y-5'>
+
                 <li>
-                  <Link to='#'>Privacy Policy</Link>
-                </li>
-                <li>
-                  <Link to='#'>Terms Of Use</Link>
+                  <Link to='/terms-of-use'>Terms Of Use</Link>
                 </li>
                 <li>
                   <Link to='#'>FAQ</Link>

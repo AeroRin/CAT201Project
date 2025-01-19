@@ -3,8 +3,38 @@ import { Button } from './ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { useState, useEffect } from 'react';
 
 const Checkout = () => {
+  const [cartItems, setCartItems] = useState([]);
+  const [totalAmount, setTotalAmount] = useState(0);
+
+  useEffect(() => {
+    fetchCartItems();
+  }, []);
+
+  const fetchCartItems = async () => {
+    try {
+      console.log('Fetching cart items...');
+      const response = await fetch('http://localhost:8080/Backend_Project/ProductCartServlet');
+      const data = await response.json();
+      console.log('Cart data received:', data);
+
+      if (data.status === 'success') {
+        const itemsWithSubtotal = data.items.map(item => ({
+          ...item,
+          subtotal: item.price * item.quantity
+        }));
+        setCartItems(itemsWithSubtotal);
+        setTotalAmount(data.totalPrice || 0);
+      } else {
+        console.error('Error fetching cart:', data.message);
+      }
+    } catch (error) {
+      console.error('Error fetching cart items:', error);
+    }
+  };
+
   return (
     <div className='py-8 lg:py-16'>
       <div className='container'>
@@ -82,37 +112,28 @@ const Checkout = () => {
             <div className='lg:pl-4 xl:pl-8'>
               <div>
                 <div className='space-y-8 mb-2'>
-                  <div className='flex items-center justify-between'>
-                    <div className='flex items-center gap-5'>
-                      <div className='w-14 h-14 inline-block bg-white'>
-                        <img
-                          src='/assets/images/gamepad.png'
-                          alt='H1 Gamepad'
-                          className='w-full h-full object-contain'
-                        />
+                  {cartItems.map((item) => (
+                    <div key={item.productId} className='flex items-center justify-between'>
+                      <div className='flex items-center gap-5'>
+                        <div className='w-14 h-14 inline-block bg-white'>
+                          <img
+                            src={`http://localhost:8080/Backend_Project/${item.image}`}
+                            alt={item.name}
+                            className='w-full h-full object-contain'
+                          />
+                        </div>
+                        <div>
+                          <span className='block'>{item.name}</span>
+                          <span className='text-sm text-gray-600'>Quantity: {item.quantity}</span>
+                        </div>
                       </div>
-                      <span>H1 Gamepad</span>
+                      <p className='text-lg'>${(item.price * item.quantity).toFixed(2)}</p>
                     </div>
-                    <p className='text-lg'>$650</p>
-                  </div>
-
-                  <div className='flex items-center justify-between'>
-                    <div className='flex items-center gap-5'>
-                      <div className='w-14 h-14 inline-block bg-white'>
-                        <img
-                          src='/assets/images/gamepad.png'
-                          alt='H1 Gamepad'
-                          className='w-full h-full object-contain'
-                        />
-                      </div>
-                      <span>H1 Gamepad</span>
-                    </div>
-                    <p className='text-lg'>$650</p>
-                  </div>
+                  ))}
                 </div>
 
                 <div className='flex items-center justify-between py-4 border-0 border-b border-solid border-primary-foreground/50 text-lg'>
-                  <span>Subtotal:</span> <span>$1750</span>
+                  <span>Subtotal:</span> <span>${totalAmount.toFixed(2)}</span>
                 </div>
 
                 <div className='flex items-center justify-between py-4 border-0 border-b border-solid border-primary-foreground/50 text-lg'>
@@ -120,9 +141,10 @@ const Checkout = () => {
                 </div>
 
                 <div className='flex items-center justify-between py-4 text-lg'>
-                  <span>Total:</span> <span>$1750</span>
+                  <span>Total:</span> <span>${totalAmount.toFixed(2)}</span>
                 </div>
               </div>
+
               <div>
                 <RadioGroup className='space-y-4'>
                   <div className='flex items-center gap-5 justify-between'>
@@ -142,6 +164,7 @@ const Checkout = () => {
                   </div>
                 </RadioGroup>
               </div>
+
               <div className='flex gap-3 flex-col md:flex-row mt-5'>
                 <input
                   type='text'
@@ -150,6 +173,7 @@ const Checkout = () => {
                 />
                 <Button className='!bg-[#DB4444] text-white h-12 px-7 rounded'>Apply Coupon</Button>
               </div>
+
               <div className='mt-5'>
                 <Button className='!bg-[#DB4444] text-white rounded h-12 px-7 rounded inline-flex justify-center items-center'>
                   Place Order
@@ -162,4 +186,5 @@ const Checkout = () => {
     </div>
   );
 };
+
 export default Checkout;

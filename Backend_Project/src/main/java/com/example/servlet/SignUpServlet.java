@@ -51,7 +51,7 @@ public class SignupServlet extends HttpServlet {
             }
 
             // Read existing users
-            String realPath = "C:\\Users\\Bryant Tan\\CAT201_Project - Copy\\Backend_Project\\src\\main\\webapp\\data\\login.json";
+            String realPath = request.getServletContext().getRealPath("/data/login.json");
             File usersFile = new File(realPath);
             
             // Create file if it doesn't exist

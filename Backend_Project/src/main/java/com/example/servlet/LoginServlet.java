@@ -12,6 +12,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONObject;
+import org.json.JSONArray;
+import org.json.JSONTokener;
+
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -43,12 +47,15 @@ public class LoginServlet extends HttpServlet {
             System.out.println("Extracted email: " + email);
             System.out.println("Extracted password: " + password);
 
-            // Read the login.json file
-            String realPath = "C:\\Users\\Bryant Tan\\CAT201_Project - Copy\\Backend_Project\\src\\main\\webapp\\data\\login.json";
+            // Read the login.json file using relative path
+            String realPath = request.getServletContext().getRealPath("/data/login.json");
             File usersFile = new File(realPath);
             if (!usersFile.exists()) {
                 throw new FileNotFoundException("login.json not found at: " + realPath);
             }
+            
+            System.out.println("Real Path: " + realPath);
+
 
             // Read the file content
             StringBuilder jsonContent = new StringBuilder();
@@ -131,7 +138,8 @@ public class LoginServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
 
         try {
-            String realPath = "C:\\Users\\Bryant Tan\\CAT201_Project - Copy\\Backend_Project\\src\\main\\webapp\\data\\login.json";
+            // Use relative path here as well
+            String realPath = request.getServletContext().getRealPath("/data/login.json");
             File usersFile = new File(realPath);
             if (!usersFile.exists()) {
                 throw new FileNotFoundException("login.json not found at: " + realPath);

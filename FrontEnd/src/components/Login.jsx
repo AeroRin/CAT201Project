@@ -50,7 +50,7 @@ const Login = () => {
     }
   };
 
-return (
+  return (
     <div className='py-8 lg:py-16 text-primary-foreground'>
       <div className='flex flex-col lg:flex-row items-center gap-7 lg:gap-0'>
         <div className='w-full lg:w-1/2'>
@@ -90,8 +90,10 @@ return (
                 </div>
 
                 <div className='flex items-center justify-between gap-5'>
-                  <Button onClick={handleSubmit} className='!bg-[#DB4444] min-w-28 text-white'>Log In</Button>
-                  <Link to='#' className='text-[#DB4444] text-base'>
+                  <Button onClick={handleSubmit} className='!bg-[#DB4444] min-w-28 text-white'>
+                    Log In
+                  </Button>
+                  <Link to='/forgot-password' className='text-[#DB4444] text-base'>
                     Forget Password?
                   </Link>
                 </div>

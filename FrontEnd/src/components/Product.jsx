@@ -51,58 +51,31 @@ const Product = () => {
     }
   ];
 
-  const addToCart = async (product) => {
+  const handleAddToCart = async (product) => {
     try {
-      console.log('Testing server connection...');
-      
-      // Test server connection with OPTIONS request first
-      try {
-        const testResponse = await fetch(`${BASE_URL}/ProductCartServlet`, {
-          method: 'OPTIONS',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          }
-        });
-        console.log('Server test response:', testResponse.status);
-      } catch (error) {
-        console.error('Server connection test failed:', error);
-        alert(`Cannot connect to server at ${BASE_URL}\nPlease check:\n1. Tomcat is running on port 8080\n2. Project is deployed correctly\n3. Context path is correct`);
-        return;
-      }
-
-      console.log('Adding product to cart:', product);
-      
-      const response = await fetch(`${BASE_URL}/ProductCartServlet`, {
+      const response = await fetch('http://localhost:8080/Backend_Project/ProductCartServlet', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Accept': 'application/json'
         },
         body: JSON.stringify({
           productId: product.id,
           name: product.name,
-          price: product.price
-        })
+          price: product.price,
+          subtotal: product.subtotal,
+          image: product.image
+        }),
       });
-
-      console.log('Response status:', response.status);
-
-      const text = await response.text();
-      console.log('Raw response:', text);
-
-      const data = JSON.parse(text);
-      console.log('Parsed response:', data);
-
+      
+      const data = await response.json();
       if (data.status === 'success') {
-        setCartItems(data.items || []);
-        alert(`${product.name} added to cart!`);
+        alert('Product added to cart successfully!');
       } else {
-        throw new Error(data.message || 'Failed to add to cart');
+        alert(data.message || 'Failed to add product to cart');
       }
     } catch (error) {
-      console.error('Error details:', error);
-      alert('Error adding to cart: ' + error.message);
+      console.error('Error adding to cart:', error);
+      alert('Error adding product to cart. Please try again.');
     }
   };
 
@@ -120,11 +93,8 @@ const Product = () => {
                 />
                 <div className='lg:absolute lg:bottom-0 lg:left-0 w-full lg:translate-y-full lg:transition lg:group-hover:translate-y-0'>
                   <Button 
-                    className='w-full rounded-none !bg-[#DB4444] text-white'
-                    onClick={() => {
-                      console.log('Button clicked for:', product.name);
-                      addToCart(product);
-                    }}
+                    onClick={() => handleAddToCart(product)}
+                    className='!bg-[#DB4444] text-white'
                   >
                     <ShoppingCart /> Add To Cart
                   </Button>
