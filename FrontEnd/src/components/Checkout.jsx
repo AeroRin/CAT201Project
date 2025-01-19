@@ -3,8 +3,30 @@ import { Button } from './ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { useSelector, useDispatch } from 'react-redux';
+import { resetItems } from '@/store/Slices/cartSlice';
+import { useNavigate } from 'react-router';
+import { useToast } from '@//hooks/use-toast';
 
 const Checkout = () => {
+  const cartItems = useSelector((state) => state.cart.items);
+  const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+
+  const { toast } = useToast();
+
+  const totalCartItemPrice = cartItems.reduce((total, curr) => total + curr.quantity * curr.price, 0);
+
+  const placeOrderHandler = () => {
+    dispatch(resetItems());
+    toast({
+      description: `Place order succeed. Have a nice shopping.`,
+      variant: 'success',
+    });
+    navigate('/product');
+  };
+
   return (
     <div className='py-8 lg:py-16'>
       <div className='container'>
@@ -82,37 +104,22 @@ const Checkout = () => {
             <div className='lg:pl-4 xl:pl-8'>
               <div>
                 <div className='space-y-8 mb-2'>
-                  <div className='flex items-center justify-between'>
-                    <div className='flex items-center gap-5'>
-                      <div className='w-14 h-14 inline-block bg-white'>
-                        <img
-                          src='/assets/images/gamepad.png'
-                          alt='H1 Gamepad'
-                          className='w-full h-full object-contain'
-                        />
+                  {cartItems.length &&
+                    cartItems.map((cartItem) => (
+                      <div key={cartItem.id} className='flex items-center justify-between'>
+                        <div className='flex items-center gap-5'>
+                          <div className='w-14 h-14 inline-block bg-white'>
+                            <img src={cartItem.imageUrl} alt={cartItem.name} className='w-full h-full object-contain' />
+                          </div>
+                          <span>{cartItem.name}</span>
+                        </div>
+                        <p className='text-lg'>RM {cartItem.price * cartItem.quantity}</p>
                       </div>
-                      <span>H1 Gamepad</span>
-                    </div>
-                    <p className='text-lg'>$650</p>
-                  </div>
-
-                  <div className='flex items-center justify-between'>
-                    <div className='flex items-center gap-5'>
-                      <div className='w-14 h-14 inline-block bg-white'>
-                        <img
-                          src='/assets/images/gamepad.png'
-                          alt='H1 Gamepad'
-                          className='w-full h-full object-contain'
-                        />
-                      </div>
-                      <span>H1 Gamepad</span>
-                    </div>
-                    <p className='text-lg'>$650</p>
-                  </div>
+                    ))}
                 </div>
 
                 <div className='flex items-center justify-between py-4 border-0 border-b border-solid border-primary-foreground/50 text-lg'>
-                  <span>Subtotal:</span> <span>$1750</span>
+                  <span>Subtotal:</span> <span>RM {totalCartItemPrice}</span>
                 </div>
 
                 <div className='flex items-center justify-between py-4 border-0 border-b border-solid border-primary-foreground/50 text-lg'>
@@ -120,7 +127,7 @@ const Checkout = () => {
                 </div>
 
                 <div className='flex items-center justify-between py-4 text-lg'>
-                  <span>Total:</span> <span>$1750</span>
+                  <span>Total:</span> <span>RM {totalCartItemPrice}</span>
                 </div>
               </div>
               <div>
@@ -151,7 +158,9 @@ const Checkout = () => {
                 <Button className='!bg-[#DB4444] text-white h-12 px-7 rounded'>Apply Coupon</Button>
               </div>
               <div className='mt-5'>
-                <Button className='!bg-[#DB4444] text-white rounded h-12 px-7 rounded inline-flex justify-center items-center'>
+                <Button
+                  className='!bg-[#DB4444] text-white rounded h-12 px-7 rounded inline-flex justify-center items-center'
+                  onClick={placeOrderHandler}>
                   Place Order
                 </Button>
               </div>

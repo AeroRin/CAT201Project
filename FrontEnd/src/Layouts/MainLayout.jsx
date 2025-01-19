@@ -13,8 +13,13 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetDescription, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
+import { useSelector } from 'react-redux';
 
 const MainLayout = () => {
+  const cartItems = useSelector((state) => state.cart.items);
+
+  const totalCartItems = cartItems.reduce((total, curr) => total + curr.quantity, 0);
+
   return (
     <div>
       <header className='border-0 border-b border-solid border-primary/30 sticky top-0 bg-primary-foreground z-50'>
@@ -67,7 +72,12 @@ const MainLayout = () => {
                   <Heart />
                 </button>
 
-                <Link to='/cart'>
+                <Link to='/cart' className='relative'>
+                  {totalCartItems > 0 && (
+                    <span className='bg-[#DB4444] text-white inline-block absolute -top-2 -right-2 text-xs w-4 h-4 rounded-full inline-flex justify-center items-center'>
+                      {totalCartItems}
+                    </span>
+                  )}
                   <ShoppingCart />
                 </Link>
 
