@@ -6,7 +6,7 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 
 const Checkout = () => {
   return (
-    <div className='py-8 lg:py-16 text-'>
+    <div className='py-8 lg:py-16'>
       <div className='container'>
         <div className='mb-8'>
           <Link to='/' className='text-primary-foreground/50 hover:text-primary-foreground'>
