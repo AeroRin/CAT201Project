@@ -1,5 +1,4 @@
-import { BrowserRouter } from 'react-router-dom';
-import { Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MainPage from './components/MainPage.jsx';
 import About from './components/About.jsx';
 import Product from './components/Product.jsx';
